@@ -1,5 +1,6 @@
-package ua.khpi.oop.lab09.model;
+package ua.khpi.oop.lab10.model;
 
+// клас вправи
 public class Exercise {
     private final String name;
 
