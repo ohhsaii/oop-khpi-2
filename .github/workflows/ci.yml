@@ -36,6 +36,6 @@ jobs:
           -o build/native/libnativefilter.so
 
       - name: Run tests
-          run: |
-            chmod +x ./gradlew
-            ./gradlew test
+        run: |
+           chmod +x ./gradlew
+           ./gradlew test
