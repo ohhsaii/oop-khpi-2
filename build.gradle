@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group = 'ua.khpi.oop'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+}
+
+test {
+    useJUnitPlatform()
+    // вказуємо шлях до зібраної c++ бібліотеки для тестів
+    systemProperty 'java.library.path', file('build/native').absolutePath
+}

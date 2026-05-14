@@ -1,0 +1,39 @@
+name: Java JNI CI
+
+on:
+  push:
+    branches: [ "lab16" ]
+  pull_request:
+    branches: [ "lab16" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Generate JNI headers
+        run: |
+          mkdir -p native-headers build/classes/java/main
+          javac -h native-headers -d build/classes/java/main src/main/java/ua/khpi/oop/lab16/NativeThresholdFilter.java
+
+      - name: Build native library
+        run: |
+          mkdir -p build/native
+          clang++ -std=c++17 -shared -fPIC \
+          -I"$JAVA_HOME/include" \
+          -I"$JAVA_HOME/include/linux" \
+          -Inative-headers \
+          native/filter.cpp \
+          -o build/native/libnativefilter.so
+
+      - name: Run tests
+        run: ./gradlew test
