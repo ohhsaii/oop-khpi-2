@@ -1,34 +1,33 @@
 package ua.khpi.oop.lab10.demo;
 
 import ua.khpi.oop.lab10.model.*;
-import ua.khpi.oop.lab10.container.JournalContainer;
+import ua.khpi.oop.lab10.container.MediaContainer;
 
 public class Main {
     public static void main(String[] args) {
-        // створюємо контейнер для тренувань
-        JournalContainer<Workout> workoutJournal = new JournalContainer<>();
+        // контейнер для фільмів
+        MediaContainer<Movie> movies = new MediaContainer<>();
+        movies.add(new Movie("дюна", "дені вільнев"));
+        movies.add(new Movie("матриця", "вачовскі"));
 
-        // додаємо елементи у наш контейнер
-        workoutJournal.add(new Workout("ранкова пробіжка"));
-        workoutJournal.add(new Workout("силове тренування"));
-        workoutJournal.add(new Workout("розтяжка"));
-
-        System.out.println("кількість тренувань у журналі: " + workoutJournal.size());
-
-        // перебираємо елементи за допомогою циклу for-each
-        // це працює саме завдяки тому, що ми реалізували інтерфейс iterable та написали свій ітератор
-        System.out.println("список тренувань:");
-        for (Workout w : workoutJournal) {
-            System.out.println(w);
+        System.out.println("каталог фільмів:");
+        for (Movie m : movies) {
+            System.out.println(m);
         }
 
-        // перевірка роботи з іншим типом
-        JournalContainer<Exercise> exerciseJournal = new JournalContainer<>();
-        exerciseJournal.add(new Exercise("присідання"));
-        exerciseJournal.add(new Exercise("віджимання"));
+        // перевірка видалення
+        movies.remove(0);
+        System.out.println("\nпісля видалення першого фільму:");
+        for (Movie m : movies) {
+            System.out.println(m);
+        }
 
-        System.out.println("\nкількість вправ: " + exerciseJournal.size());
-        for (Exercise e : exerciseJournal) {
+        // контейнер для епізодів
+        MediaContainer<SeriesEpisode> episodes = new MediaContainer<>();
+        episodes.add(new SeriesEpisode("пілот", 1));
+
+        System.out.println("\nепізоди:");
+        for (SeriesEpisode e : episodes) {
             System.out.println(e);
         }
     }
