@@ -16,5 +16,5 @@ dependencies {
 test {
     useJUnitPlatform()
     // вказуємо шлях до зібраної c++ бібліотеки для тестів
-    systemProperty 'java.library.path', file('build/native').absolutePath
+    systemProperty "java.library.path", file("build/native").absolutePath
 }
