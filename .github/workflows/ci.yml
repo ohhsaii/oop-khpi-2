@@ -24,16 +24,18 @@ jobs:
         run: |
           mkdir -p native-headers build/classes/java/main
           javac -h native-headers -d build/classes/java/main src/main/java/ua/khpi/oop/lab16/NativeThresholdFilter.java
+
       - name: Build native library
         run: |
           mkdir -p build/native
-         clang++ -std=c++17 -shared -fPIC \
-         -I"\$JAVA_HOME/include" \
-         -I"\$JAVA_HOME/include/linux" \
-         -Inative-headers \
-         native/filter.cpp \
-         -o build/native/libnativefilter.so
+          clang++ -std=c++17 -shared -fPIC \
+          -I"$JAVA_HOME/include" \
+          -I"$JAVA_HOME/include/linux" \
+          -Inative-headers \
+          native/filter.cpp \
+          -o build/native/libnativefilter.so
+
       - name: Run tests
         run: |
-           chmod +x ./gradlew
-           ./gradlew test
+          chmod +x ./gradlew
+          ./gradlew test
